@@ -1,169 +1,169 @@
-# Purple Agents - 三个性能版本
+# Purple Agents - Three Performance Variants
 
-本目录包含三个不同性能级别的Purple Agent实现，用于演示Green Agent评分系统的区分能力。
+This directory contains three Purple Agent implementations at different performance levels, demonstrating the Green Agent scoring system's ability to differentiate code quality.
 
-## 📁 目录结构
+## 📁 Directory Structure
 
 ```
 purple_agents/
-├── v1_high_performance/     # V1 - 高性能版 (75.3%)
-├── v2_medium_performance/   # V2 - 中等性能版 (70.7%)
-└── v3_baseline/             # V3 - 基线版 (66.4%)
+├── v1_high_performance/     # V1 - High Performance (75.3%)
+├── v2_medium_performance/   # V2 - Medium Performance (70.7%)
+└── v3_baseline/             # V3 - Baseline (66.4%)
 ```
 
-## 📊 性能对比
+## 📊 Performance Comparison
 
-| Version | Score | Average | Observability | 特点 |
+| Version | Score | Average | Observability | Key Features |
 |:---|:---:|:---:|:---:|:---|
-| **V1** | 527.4/700 | **75.3%** | 15/15 | 完全结构化日志 |
-| **V2** | 495.0/700 | **70.7%** | ~9/15 | 部分结构化日志 |
-| **V3** | 464.5/700 | **66.4%** | ~3.75/15 | 基础日志 |
+| **V1** | 527.4/700 | **75.3%** | 15/15 | Full structured logging |
+| **V2** | 495.0/700 | **70.7%** | ~9/15 | Partial structured logging |
+| **V3** | 464.5/700 | **66.4%** | ~3.75/15 | Basic logging |
 
-## 🔍 版本详情
+## 🔍 Version Details
 
-### V1 - 高性能版 (v1_high_performance/)
+### V1 - High Performance (v1_high_performance/)
 
-**得分：527.4/700 (75.3%)**
+**Score: 527.4/700 (75.3%)**
 
-**特点：**
-- ✅ 完全结构化日志：`[task_id=X] [page=Y] [request=Z] [complete=true]`
-- ✅ 详细的性能指标追踪
-- ✅ 完整的错误统计（http_429, http_500）
-- ✅ 精确的重试效率记录
+**Features:**
+- ✅ Full structured logging: `[task_id=X] [page=Y] [request=Z] [complete=true]`
+- ✅ Detailed performance metrics tracking
+- ✅ Complete error statistics (http_429, http_500)
+- ✅ Precise retry efficiency recording
 
-**日志示例：**
+**Log Example:**
 ```
 INFO: [task_id=T1_single_page] [page=1] [request=2] [complete=true] Fetched 800 rows
 ```
 
-**推荐用于：**
-- 🏢 生产环境
-- 📊 需要详细性能追踪
-- 🔍 复杂问题调试
+**Recommended for:**
+- 🏢 Production environments
+- 📊 Detailed performance tracking needs
+- 🔍 Complex debugging scenarios
 
-### V2 - 中等性能版 (v2_medium_performance/)
+### V2 - Medium Performance (v2_medium_performance/)
 
-**得分：495.0/700 (70.7%)**
+**Score: 495.0/700 (70.7%)**
 
-**特点：**
-- ✅ 部分结构化日志：`[task_id=X] [page=Y] INFO: Message`
-- ✅ 基本的追溯能力
-- ✅ 标准重试逻辑
-- ⚠️ 缺少request字段和complete标记
+**Features:**
+- ✅ Partial structured logging: `[task_id=X] [page=Y] INFO: Message`
+- ✅ Basic traceability
+- ✅ Standard retry logic
+- ⚠️ Missing request field and complete marker
 
-**日志示例：**
+**Log Example:**
 ```
 [task_id=T1_single_page] [page=1] INFO: Fetching page 1
 ```
 
-**推荐用于：**
-- 🧪 测试环境
-- 📋 中等复杂度项目
-- 👥 小团队协作
+**Recommended for:**
+- 🧪 Testing environments
+- 📋 Medium complexity projects
+- 👥 Small team collaboration
 
-### V3 - 基线版 (v3_baseline/)
+### V3 - Baseline (v3_baseline/)
 
-**得分：464.5/700 (66.4%)**
+**Score: 464.5/700 (66.4%)**
 
-**特点：**
-- ⚠️ 基础日志：`INFO: Message`
-- ⚠️ 最小化实现
-- ⚠️ 缺少结构化字段
-- ✅ 核心功能完整
+**Features:**
+- ⚠️ Basic logging: `INFO: Message`
+- ⚠️ Minimal implementation
+- ⚠️ No structured fields
+- ✅ Core functionality complete
 
-**日志示例：**
+**Log Example:**
 ```
 INFO: Fetching page 1
 INFO: Task T1_single_page complete
 ```
 
-**推荐用于：**
-- 📚 学习参考
-- 🔬 最小化依赖
-- 🎓 教学用途
+**Recommended for:**
+- 📚 Learning reference
+- 🔬 Minimal dependencies
+- 🎓 Educational purposes
 
-## 🚀 使用方法
+## 🚀 Usage
 
-### 运行V1（高性能版）
+### Run V1 (High Performance)
 
 ```bash
 cd purple_agents/v1_high_performance
 python3 run.py --task-id T1_single_page --mock-url http://localhost:8000 --output-dir ./output
 ```
 
-### 运行V2（中等性能版）
+### Run V2 (Medium Performance)
 
 ```bash
 cd purple_agents/v2_medium_performance
 python3 run.py --task-id T1_single_page --mock-url http://localhost:8000 --output-dir ./output
 ```
 
-### 运行V3（基线版）
+### Run V3 (Baseline)
 
 ```bash
 cd purple_agents/v3_baseline
 python3 run.py --task-id T1_single_page --mock-url http://localhost:8000 --output-dir ./output
 ```
 
-## 📈 评分差异分析
+## 📈 Score Breakdown Analysis
 
-### Observability得分对比
+### Observability Score Comparison
 
-| Version | 结构化程度 | 得分 | 差距 |
+| Version | Structure Level | Score | Gap |
 |:---|:---|:---:|:---|
-| V1 | 完全结构化 | 15/15 | 基准 |
-| V2 | 部分结构化 | ~9/15 | -6分 |
-| V3 | 基础日志 | ~3.75/15 | -11.25分 |
+| V1 | Full structured | 15/15 | Baseline |
+| V2 | Partial structured | ~9/15 | -6 pts |
+| V3 | Basic logging | ~3.75/15 | -11.25 pts |
 
-### 为什么V2比V3高30.5分？
+### Why V2 Scores 30.5 Points Higher Than V3?
 
-**V2的优势：**
-1. 部分结构化日志 (+4-5分/任务)
-2. task_id和page字段可追溯 (+1-2分/任务)
-3. 更好的调试体验
+**V2 Advantages:**
+1. Partial structured logging (+4-5 pts/task)
+2. Traceable task_id and page fields (+1-2 pts/task)
+3. Better debugging experience
 
-**V3的劣势：**
-1. 缺少结构化字段 (-4-5分/任务)
-2. 难以自动化解析 (-1-2分/任务)
-3. 追踪困难
+**V3 Disadvantages:**
+1. Missing structured fields (-4-5 pts/task)
+2. Difficult to parse automatically (-1-2 pts/task)
+3. Poor traceability
 
-## 🎯 选择建议
+## 🎯 Selection Guide
 
-| 场景 | 推荐版本 | 原因 |
+| Scenario | Recommended | Reason |
 |:---|:---:|:---|
-| 生产环境 | V1 | 最佳可观察性和调试能力 |
-| 测试环境 | V2 | 平衡性能和复杂度 |
-| 学习参考 | V3 | 最简实现，易于理解 |
-| 性能要求高 | V1 | 详细的性能指标 |
-| 快速原型 | V3 | 最小化依赖 |
+| Production | V1 | Best observability and debugging |
+| Testing | V2 | Balanced performance and complexity |
+| Learning | V3 | Simplest implementation |
+| High performance needs | V1 | Detailed performance metrics |
+| Quick prototyping | V3 | Minimal dependencies |
 
-## 📝 技术细节
+## 📝 Technical Details
 
-### 共同特性
+### Common Features
 
-所有三个版本都实现了：
-- ✅ 正确的分页逻辑
-- ✅ 指数退避重试
-- ✅ 去重和排序
-- ✅ Totals行过滤（T7任务）
-- ✅ 完整的输出文件（data.jsonl, metadata.json, run.log）
+All three versions implement:
+- ✅ Correct pagination logic
+- ✅ Exponential backoff retry
+- ✅ Deduplication and sorting
+- ✅ Totals row filtering (T7 task)
+- ✅ Complete output files (data.jsonl, metadata.json, run.log)
 
-### 主要差异
+### Key Differences
 
-| 特性 | V1 | V2 | V3 |
+| Feature | V1 | V2 | V3 |
 |:---|:---:|:---:|:---:|
-| 完全结构化日志 | ✅ | ❌ | ❌ |
-| 部分结构化日志 | ✅ | ✅ | ❌ |
-| request字段 | ✅ | ❌ | ❌ |
-| complete标记 | ✅ | ❌ | ❌ |
-| 详细错误统计 | ✅ | ⚠️ | ❌ |
+| Full structured logging | ✅ | ❌ | ❌ |
+| Partial structured logging | ✅ | ✅ | ❌ |
+| Request field | ✅ | ❌ | ❌ |
+| Complete marker | ✅ | ❌ | ❌ |
+| Detailed error stats | ✅ | ⚠️ | ❌ |
 
-## 🔗 相关资源
+## 🔗 Related Resources
 
-- [Green Agent评分系统](../src/judge.py)
-- [评分标准文档](../README.md)
-- [测试数据](../mock_service/fixtures/)
+- [Green Agent Scoring System](../src/judge.py)
+- [Scoring Documentation](../README.md)
+- [Test Fixtures](../mock_service/fixtures/)
 
 ---
 
-**注意：** 这三个版本的核心功能完全相同，主要差异在于日志的结构化程度和可观察性。选择哪个版本取决于你的具体需求和环境。
+**Note:** All three versions have identical core functionality. The main differences are in logging structure and observability. Choose based on your specific requirements and environment.

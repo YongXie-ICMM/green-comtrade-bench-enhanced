@@ -1,0 +1,6 @@
+# Requirements are managed in pyproject.toml
+# Install with: pip install -e .
+# 
+# This file is kept for backward compatibility only.
+# To regenerate: pip freeze > requirements.txt (after pip install -e .)
+

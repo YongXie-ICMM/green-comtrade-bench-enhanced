@@ -1,0 +1,36 @@
+name: ci
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Clean and start services
+        run: |
+          make clean
+          make up
+      
+      - name: Wait for services to be ready
+        run: |
+          sleep 5
+          timeout 30 bash -c 'until curl -f http://localhost:9009/healthz 2>/dev/null; do sleep 1; done' || true
+          timeout 30 bash -c 'until curl -f http://localhost:8000/docs 2>/dev/null; do sleep 1; done' || true
+      
+      - name: Generate and stage fixtures
+        run: |
+          make fixtures
+      
+      - name: Run tests
+        run: |
+          make test
+      
+      - name: Cleanup
+        if: always()
+        run: |
+          docker compose down -v
